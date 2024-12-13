@@ -1,61 +1,53 @@
-{\rtf1\ansi\deff0
-{\b\fs32 WP Download Button\par}\par
+WP Download Button
+Descrição
+WP Download Button é um plugin WordPress que permite adicionar facilmente botões de download personalizados aos seus posts. Com este plugin, você pode:
 
-\par
-{\b\fs32 Descrição\par}\par
+Adicionar um botão de download para arquivos específicos em cada post
+Personalizar o texto do botão de download
+Configurar a aparência global do botão, incluindo cores e tamanho
+Gerenciar as configurações do botão de download através de uma interface amigável no painel de administração
 
-O WP Download Button é um plugin WordPress que adiciona um botão de download personalizado aos seus posts. Ele permite que você faça upload de arquivos diretamente no editor de posts e exiba um botão de download atraente e personalizável no final do conteúdo.\par
-\par
-{\b\fs32 Autor\par}\par
+Autor
+Dev Jean Krause
+Site: devjean.com.br
+Instalação
 
-Dev Jean Krause\par
-Website: https://devjean.com.br\par
-\par
-{\b\fs32 Recursos\par}\par
+Faça o upload da pasta do plugin para o diretório /wp-content/plugins/
+Ative o plugin através do menu 'Plugins' no WordPress
+Acesse as configurações do plugin em 'Botão Download' no menu lateral do painel de administração
 
-- Upload de arquivos diretamente no editor de posts\par
-- Personalização do texto do botão para cada post\par
-- Configurações globais para aparência do botão\par
-- Opções de tamanho do botão (pequeno, médio, grande)\par
-- Personalização das cores do botão e efeito hover\par
-- Posicionamento automático do botão no final do post\par
-- Interface administrativa para configurações globais\par
-\par
-{\b\fs32 Instalação\par}\par
+Uso
+Adicionar um botão de download a um post
 
-1. Faça o upload da pasta do plugin para o diretório {\f1 /wp-content/plugins/}\par
-2. Ative o plugin através do menu 'Plugins' no WordPress\par
-3. Configure as opções globais em "Botão Download" no menu administrativo\par
-\par
-{\b\fs32 Uso\par}\par
+Edite um post existente ou crie um novo
+Localize a metabox "Arquivo para Download" abaixo do editor de conteúdo
+Clique em "Upload Arquivo" para selecionar um arquivo da biblioteca de mídia ou fazer upload de um novo arquivo
+(Opcional) Personalize o texto do botão para este post específico
+Atualize ou publique o post
 
-1. Ao editar um post, você verá uma nova meta box chamada "Arquivo para Download"\par
-2. Faça o upload do arquivo que deseja disponibilizar para download\par
-3. Personalize o texto do botão, se desejar\par
-4. Publique ou atualize o post\par
-5. O botão de download aparecerá automaticamente no final do conteúdo do post\par
-\par
-{\b\fs32 Configurações\par}\par
+Configurar as opções globais do botão
 
-Acesse "Botão Download" no menu administrativo para configurar:\par
-- Texto padrão do botão\par
-- Cor do botão\par
-- Cor do botão ao passar o mouse (hover)\par
-- Tamanho do botão\par
-\par
-{\b\fs32 Requisitos\par}\par
+No painel de administração, vá para 'Botão Download'
+Configure as seguintes opções:
 
-- WordPress 4.7 ou superior\par
-- PHP 5.6 ou superior\par
-\par
-{\b\fs32 Suporte\par}\par
 
-Para suporte ou dúvidas, entre em contato através do site https://devjean.com.br\par
-\par
-{\b\fs32 Licença\par}\par
+Texto padrão do botão
+Cor do botão
+Cor do texto do botão
+Cor do botão ao passar o mouse (hover)
+Tamanho do botão
 
-Este plugin é licenciado sob a GPL v2 ou posterior.\par
-\par
----\par
-\par
-Esperamos que o WP Download Button melhore a experiência de compartilhamento de arquivos em seu site WordPress!}
+
+Clique em "Salvar alterações"
+
+Requisitos
+
+WordPress 5.0 ou superior
+PHP 7.0 ou superior
+
+Suporte
+Para suporte ou para relatar problemas, por favor, visite devjean.com.br ou abra uma issue no repositório do GitHub (se disponível).
+Licença
+Este plugin é licenciado sob a GPL v2 ou posterior.
+
+Esperamos que você aproveite o WP Download Button! Se você tiver alguma dúvida ou sugestão, não hesite em entrar em contato.

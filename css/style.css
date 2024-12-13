@@ -1,0 +1,37 @@
+.download-button-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.download-button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none !important;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.download-button:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.download-button-small {
+    padding: 8px 15px;
+    font-size: 14px;
+}
+
+.download-button-medium {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.download-button-large {
+    padding: 12px 25px;
+    font-size: 18px;
+}
