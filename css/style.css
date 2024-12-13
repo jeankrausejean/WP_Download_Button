@@ -4,21 +4,24 @@
 }
 
 .download-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px 20px;
     text-decoration: none !important;
-    border-radius: 4px;
     transition: all 0.3s ease;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
+.download-button i {
+    margin-right: 8px;
+}
+
 .download-button:hover {
-    opacity: 1;
-    transform: translateY(-2px);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .download-button-small {
