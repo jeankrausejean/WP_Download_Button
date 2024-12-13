@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: WP Download Button
-Plugin URI: https://devjean.com.br
+Plugin URI: 
 Description: Adiciona um botão de download personalizado aos posts
-Version: 1.2
+Version: 1.1
 Author: Dev Jean Krause
 Author URI: https://devjean.com.br
 */
@@ -20,8 +20,8 @@ class WP_Download_Button {
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'register_settings'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_styles'));
+        add_filter('the_content', array($this, 'add_download_button_to_content'));
         add_action('admin_enqueue_scripts', array($this, 'admin_styles'));
-        add_shortcode('download_button', array($this, 'shortcode_download_button'));
     }
 
     public function admin_styles() {
@@ -58,8 +58,6 @@ class WP_Download_Button {
             <label style="display: block; margin-bottom: 5px;"><strong>Texto do Botão:</strong></label>
             <input type="text" name="download_button_text" value="<?php echo esc_attr($button_text); ?>" style="width: 50%;">
         </div>
-
-        <p><strong>Nota:</strong> Para inserir o botão manualmente, use o shortcode: [download_button]</p>
         
         <script>
         jQuery(document).ready(function($) {
@@ -115,10 +113,6 @@ class WP_Download_Button {
         register_setting('download_button_options', 'download_button_text_color');
         register_setting('download_button_options', 'download_button_hover_color');
         register_setting('download_button_options', 'download_button_size');
-        register_setting('download_button_options', 'download_button_position');
-        register_setting('download_button_options', 'download_button_border_radius');
-        register_setting('download_button_options', 'download_button_icon');
-        register_setting('download_button_options', 'download_button_hover_effect');
     }
 
     public function settings_page() {
@@ -136,16 +130,6 @@ class WP_Download_Button {
                         <td>
                             <input type="text" name="download_button_text" 
                                    value="<?php echo esc_attr(get_option('download_button_text', 'Download')); ?>">
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Posição do Botão</th>
-                        <td>
-                            <select name="download_button_position">
-                                <option value="after" <?php selected(get_option('download_button_position'), 'after'); ?>>Depois do conteúdo</option>
-                                <option value="before" <?php selected(get_option('download_button_position'), 'before'); ?>>Antes do conteúdo</option>
-                                <option value="manual" <?php selected(get_option('download_button_position'), 'manual'); ?>>Manual (usar shortcode)</option>
-                            </select>
                         </td>
                     </tr>
                     <tr>
@@ -170,33 +154,6 @@ class WP_Download_Button {
                         </td>
                     </tr>
                     <tr>
-                        <th>Borda Arredondada</th>
-                        <td>
-                            <input type="number" name="download_button_border_radius" 
-                                   value="<?php echo esc_attr(get_option('download_button_border_radius', '4')); ?>" min="0" max="50"> px
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Ícone</th>
-                        <td>
-                            <select name="download_button_icon">
-                                <option value="none" <?php selected(get_option('download_button_icon'), 'none'); ?>>Nenhum</option>
-                                <option value="download" <?php selected(get_option('download_button_icon'), 'download'); ?>>Download</option>
-                                <option value="arrow" <?php selected(get_option('download_button_icon'), 'arrow'); ?>>Seta</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Efeito Hover</th>
-                        <td>
-                            <select name="download_button_hover_effect">
-                                <option value="none" <?php selected(get_option('download_button_hover_effect'), 'none'); ?>>Nenhum</option>
-                                <option value="grow" <?php selected(get_option('download_button_hover_effect'), 'grow'); ?>>Crescer</option>
-                                <option value="shrink" <?php selected(get_option('download_button_hover_effect'), 'shrink'); ?>>Encolher</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <th>Tamanho do Botão</th>
                         <td>
                             <select name="download_button_size">
@@ -218,98 +175,44 @@ class WP_Download_Button {
         <?php
     }
 
-    public function generate_button($post_id = null) {
-        if (!$post_id) {
-            $post_id = get_the_ID();
+    public function add_download_button_to_content($content) {
+        if (is_single() && get_post_type() === 'post') {
+            $file_url = get_post_meta(get_the_ID(), '_download_file_url', true);
+            if ($file_url) {
+                $button_text = get_post_meta(get_the_ID(), '_download_button_text', true);
+                if (empty($button_text)) {
+                    $button_text = get_option('download_button_text', 'Download');
+                }
+                $button_color = get_option('download_button_color', '#0073aa');
+                $button_text_color = get_option('download_button_text_color', '#ffffff');
+                $button_size = get_option('download_button_size', 'medium');
+                
+                $button = sprintf(
+                    '<div class="download-button-container"><a href="%s" class="download-button download-button-%s" style="background-color: %s; color: %s;" target="_blank" rel="noopener noreferrer">%s</a></div>',
+                    esc_url($file_url),
+                    esc_attr($button_size),
+                    esc_attr($button_color),
+                    esc_attr($button_text_color),
+                    esc_html($button_text)
+                );
+                
+                $content .= $button;
+            }
         }
-
-        $file_url = get_post_meta($post_id, '_download_file_url', true);
-        if (!$file_url) {
-            return '';
-        }
-
-        $button_text = get_post_meta($post_id, '_download_button_text', true);
-        if (empty($button_text)) {
-            $button_text = get_option('download_button_text', 'Download');
-        }
-
-        $icon = get_option('download_button_icon', 'none');
-        $icon_html = '';
-        if ($icon === 'download') {
-            $icon_html = '<i class="fas fa-download"></i> ';
-        } elseif ($icon === 'arrow') {
-            $icon_html = '<i class="fas fa-arrow-down"></i> ';
-        }
-
-        $button_size = get_option('download_button_size', 'medium');
-        
-        return sprintf(
-            '<div class="download-button-container"><a href="%s" class="download-button download-button-%s" target="_blank" rel="noopener noreferrer">%s%s</a></div>',
-            esc_url($file_url),
-            esc_attr($button_size),
-            $icon_html,
-            esc_html($button_text)
-        );
-    }
-
-    public function shortcode_download_button($atts) {
-        return $this->generate_button();
+        return $content;
     }
 
     public function enqueue_styles() {
-        wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
         wp_enqueue_style(
             'download-button-style',
             plugins_url('css/style.css', __FILE__)
         );
 
-        $button_color = get_option('download_button_color', '#0073aa');
-        $button_text_color = get_option('download_button_text_color', '#ffffff');
-        $button_hover_color = get_option('download_button_hover_color', '#005177');
-        $border_radius = get_option('download_button_border_radius', '4');
-        $hover_effect = get_option('download_button_hover_effect', 'none');
-
-        $custom_css = "
-            .download-button {
-                background-color: {$button_color};
-                color: {$button_text_color} !important;
-                border-radius: {$border_radius}px;
-            }
-            .download-button:hover {
-                background-color: {$button_hover_color};
-                color: {$button_text_color} !important;
-            }
-        ";
-
-        if ($hover_effect === 'grow') {
-            $custom_css .= "
-                .download-button:hover {
-                    transform: scale(1.1);
-                }
-            ";
-        } elseif ($hover_effect === 'shrink') {
-            $custom_css .= "
-                .download-button:hover {
-                    transform: scale(0.9);
-                }
-            ";
-        }
-
+        $custom_css = sprintf(
+            '.download-button:hover { background-color: %s !important; }',
+            esc_html(get_option('download_button_hover_color', '#005177'))
+        );
         wp_add_inline_style('download-button-style', $custom_css);
-    }
-
-    public function filter_content($content) {
-        if (is_single() && get_post_type() === 'post') {
-            $position = get_option('download_button_position', 'after');
-            $button = $this->generate_button();
-            
-            if ($position === 'before') {
-                return $button . $content;
-            } elseif ($position === 'after') {
-                return $content . $button;
-            }
-        }
-        return $content;
     }
 }
 
