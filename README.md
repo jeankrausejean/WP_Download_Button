@@ -11,7 +11,8 @@ Gerenciar as configurações do botão de download através de uma interface ami
 
 ### Autor
 Dev Jean Krause
-Site: devjean.com.br
+
+Site: [devjean.com.br](https://devjean.com.br/)
 
 
 ## Instalação
