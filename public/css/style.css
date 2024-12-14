@@ -1,6 +1,31 @@
 .download-button-container {
     margin: 20px 0;
+}
+
+/* Alinhamentos do container */
+.download-button-align-left {
+    text-align: left;
+}
+
+.download-button-align-center {
     text-align: center;
+}
+
+.download-button-align-right {
+    text-align: right;
+}
+
+.download-button-align-justify {
+    text-align: center;
+}
+
+.download-button-align-justify .download-button {
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .download-button {
@@ -9,7 +34,6 @@
     text-decoration: none !important;
     border-radius: 4px;
     transition: all 0.3s ease;
-    font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -23,15 +47,12 @@
 
 .download-button-small {
     padding: 8px 15px;
-    font-size: 14px;
 }
 
 .download-button-medium {
     padding: 10px 20px;
-    font-size: 16px;
 }
 
 .download-button-large {
     padding: 12px 25px;
-    font-size: 18px;
 }
