@@ -14,6 +14,14 @@ Dev Jean Krause
 
 Site: [devjean.com.br](https://devjean.com.br/)
 
+## Principais Características 
+* Facilidade de uso: "Interface intuitiva, sem necessidade de conhecimentos de programação"
+* Personalização: "Diversos estilos e cores para combinar com o seu site"
+* Compatibilidade: "Funciona com qualquer tema WordPress"
+* Estatísticas de download: "Acompanhe o número de downloads de cada arquivo" (Em Breve)
+* Suporte a múltiplos formatos: "PDF, DOC, ZIP, MP4, PNG e muito mais"
+
+
 
 ## Instalação
 
