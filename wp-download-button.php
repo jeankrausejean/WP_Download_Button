@@ -3,7 +3,7 @@
 Plugin Name: WP Download Button
 Plugin URI: 
 Description: Adiciona um botão de download personalizado aos posts
-Version: 1.1
+Version: 1.2
 Author: Dev Jean Krause
 Author URI: https://devjean.com.br
 */
